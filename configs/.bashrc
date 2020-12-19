@@ -96,6 +96,7 @@ alias gs='git status'
 alias ga='git add'
 alias gap='git add -p'
 alias gx='git checkout'
+alias vim='nvim'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
