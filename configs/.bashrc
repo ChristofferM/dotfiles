@@ -31,6 +31,9 @@ set editing-mode vi
 # I am sane..
 alias python=python3
 
-#
+# Extra binaries
 source "$HOME/.cargo/env"
 export PATH=~/Packages/rust-analyser:$PATH
+
+#
+export EDITOR=nvim
