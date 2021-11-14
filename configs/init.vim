@@ -2,24 +2,50 @@ inoremap jj <Esc>
 
 set exrc
 
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4    " number of spaces to use for autoindent
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set autoindent
 set copyindent      " copy indent from the previous line
 
 let g:mapleader = "\<Space>"
 
-call plug#begin('~/.config/nvim/plugs')
+call plug#begin('~/.config/nvim/plugged')
+" Latex
 Plug 'lervag/vimtex'
-Plug 'dense-analysis/ale'
+" File search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'bfrg/vim-cpp-modern'
-Plug 'gauteh/vim-cppman'
-Plug 'brookhong/cscope.vim'
+" Surround motion
+Plug 'tpope/vim-surround'
+" Status bar
+Plug 'vim-airline/vim-airline'
+" Color scheme
+Plug 'ghifarit53/tokyonight-vim'
+" Common configuration of language servers
+Plug 'neovim/nvim-lspconfig'
+
+" Auto completion
+" Lots of separate plugins for nvim-cmp
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" Also requeres a snip plugin
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 call plug#end()
+
+" nvim-cmp option
+set completeopt=menu,menuone,noselect
+
+" Configuration for lsp plugins
+luafile ~/.config/nvim/nvim_lua_configs/lspconfig.lua
+luafile ~/.config/nvim/nvim_lua_configs/lua-ls.lua
+luafile ~/.config/nvim/nvim_lua_configs/nvim-cmp.lua
+
 
 " vimtex
 let g:tex_flavor='latex'
@@ -28,34 +54,19 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
-" vim-cpp-highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-
-" ALE
-let g:ale_c_build_dir_names = ['build', 'bin']
-
-" CSCOPE
-let g:cscope_silent = 1
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
-" s: Find this C symbol
-nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-" g: Find this definition
-nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-" d: Find functions called by this function
-nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
-nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-" t: Find this text string
-nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-" e: Find this egrep pattern
-nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-" f: Find this file
-nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-" i: Find files #including this file
-nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
-
-
 nnoremap <leader><space> :FZF<CR>
+nnoremap <leader>b :buffers<CR>
+nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
+nnoremap <leader>e :e .<CR>
+
+set number relativenumber
+set nu rnu
+set splitbelow
+
+" Style
+set termguicolors
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+let g:airline_theme = "tokyonight"
+
+highlight Pmenu guibg=brown gui=bold
