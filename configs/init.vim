@@ -36,7 +36,22 @@ Plug 'hrsh7th/nvim-cmp'
 " Also requeres a snip plugin
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+
+" Python Repl
+Plug 'jpalardy/vim-slime'
 call plug#end()
+
+let g:slime_target = "tmux"
+let g:slime_paste_file = "$HOME/.slime_paste"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+let g:slime_cell_delimiter = "```"
+let g:slime_python_ipython = 1
+nmap <leader>ss <Plug>SlimeLineSend
+nmap <leader>sc <Plug>SlimeSendCell
+nmap <leader>sr <Plug>SlimeParagraphSend
+xmap <leader>sr <Plug>SlimeRegionSend
+nmap <leader>sf <Plug>SlimeConfig
+
 
 " nvim-cmp option
 set completeopt=menu,menuone,noselect
