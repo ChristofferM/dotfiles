@@ -38,6 +38,10 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=1
 export EDITOR=nvim
 
 
+# ------------------CONDA--------------------------------
+alias ca="conda activate"
+alias cel="conda env list"
+
 # ------------------GIT--------------------------------
 alias gs="git status"
 
@@ -99,7 +103,7 @@ function greplog {
 # List recently worked on branches
 alias rb="git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) \
 %(color:yellow)%(refname:short)%(color:reset) (%(color:green)\
-%(committerdate:relative)%(color:reset))' --color=always | head -n10"
+%(committerdate:relative)%(color:reset)) %(contents:subject)' --color=always | head -n10"
 
 # Update local git branch from origin. If no argument is given, the
 # current branch is updated
