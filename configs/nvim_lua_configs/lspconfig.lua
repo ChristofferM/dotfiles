@@ -35,15 +35,22 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer'}
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
+nvim_lsp.rust_analyzer.setup {
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  checkOnSave = {
+        command = "clippy"
+  },
+}
+
+nvim_lsp.pyright.setup {
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
   }
-end
+}
 
 nvim_lsp.rls.setup {
   settings = {
