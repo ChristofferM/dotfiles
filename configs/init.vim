@@ -80,6 +80,8 @@ set number relativenumber
 set nu rnu
 set splitbelow
 
+au VimEnter * if eval("@%") == "" | e . | endif
+
 " Style
 set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
